@@ -1,0 +1,236 @@
+/* ═══════════════════════════════════════════════════════════
+   profile-edit.css — Editar perfil
+   Contiene TODOS los estilos que usa esta vista.
+   ═══════════════════════════════════════════════════════════ */
+
+@import "variables.css";
+
+/* ── Reset / Base ─────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 600; line-height: 1.3; color: var(--text); }
+h1 { font-size: var(--text-3xl); }
+
+p { margin-bottom: var(--s4); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; height: auto; display: block; }
+ul, ol { list-style: none; }
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* ── Topbar (fragments/header.html) ─── .topbar, .topbar-brand, .topbar-logo, .topbar-nav, .nav-icon-btn, .btn-register ─── */
+
+.topbar {
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--s6);
+  height: var(--nav-h);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar-brand {
+  display: flex; align-items: center; gap: var(--s2);
+  font-weight: 700; font-size: var(--text-lg);
+  color: #fff; text-decoration: none;
+}
+
+.topbar-brand:hover { text-decoration: none; opacity: .9; }
+
+.topbar-logo { font-size: 1.4rem; }
+
+.topbar-nav { display: flex; align-items: center; gap: .15rem; }
+
+.nav-icon-btn {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  padding: var(--s2) .8rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm); font-weight: 500;
+  font-family: var(--font);
+  color: rgba(255,255,255,.9);
+  background: transparent; border: none;
+  cursor: pointer; text-decoration: none;
+  transition: background var(--trans);
+  white-space: nowrap;
+}
+
+.nav-icon-btn:hover { background: rgba(255,255,255,.15); text-decoration: none; color: #fff; }
+.nav-icon-btn .material-icons { font-size: 1rem !important; }
+.btn-register { border: 1px solid rgba(255,255,255,.4); }
+
+/* ── Footer (fragments/footer.html) ─── .site-footer, .footer-inner, .footer-copy ─── */
+
+.site-footer {
+  padding: var(--s4) var(--s6);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; justify-content: center;
+}
+
+.footer-copy { font-size: var(--text-sm); color: var(--text-secondary); margin: 0; }
+
+/* ── Contenedor central de formularios ─── .profile-main ─── */
+
+.profile-main {
+  width: min(580px, calc(100% - var(--s6) * 2));
+  margin: var(--s8) auto;
+  padding: 0;
+  display: flex; flex-direction: column;
+  gap: var(--s4);
+  align-self: center;
+}
+
+/* ── Tarjeta de edición ─── .edit-card, .edit-header, .edit-form ─── */
+
+.edit-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: var(--s6) var(--s8);
+  border: 1px solid var(--border);
+}
+
+.edit-header {
+  display: flex; align-items: center; gap: var(--s3);
+  margin-bottom: var(--s6);
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid var(--border);
+}
+
+.edit-header h1 { font-size: var(--text-lg); font-weight: 700; color: var(--text); margin: 0; }
+
+.edit-form { display: flex; flex-direction: column; gap: var(--s4); }
+
+/* ── Botón volver ─── .back-btn ─── */
+
+.back-btn {
+  display: inline-flex; align-items: center; gap: var(--s1);
+  color: var(--primary); text-decoration: none;
+  font-size: var(--text-sm); font-weight: 600;
+}
+
+.back-btn:hover { text-decoration: underline; }
+.back-btn .material-icons { font-size: 1rem !important; }
+
+/* ── Fila de dos columnas ─── .form-row ─── */
+
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4);
+}
+
+/* ── Grupo de campo ─── .form-group, label, inputs, textarea ─── */
+
+.form-group { display: flex; flex-direction: column; gap: .3rem; }
+
+.form-group label {
+  font-size: var(--text-sm); font-weight: 600;
+  color: #374151;
+  display: flex; align-items: center; gap: var(--s1);
+}
+
+.form-group label .material-icons { font-size: .95rem !important; color: var(--primary); }
+
+.form-group input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
+.form-group textarea {
+  width: 100%;
+  padding: .65rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: var(--text-sm);
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: border-color var(--trans), box-shadow var(--trans);
+}
+
+.form-group input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-muted); }
+
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-group input.error,
+.form-group textarea.error { border-color: var(--danger); }
+.form-group input.error:focus,
+.form-group textarea.error:focus { box-shadow: 0 0 0 3px rgba(220,38,38,.12); }
+
+/* ── Error de campo ─── .field-error ─── */
+
+.field-error { font-size: var(--text-xs); color: var(--danger); }
+
+/* ── Barra de acciones del formulario ─── .form-actions, .btn-save, .btn-cancel ─── */
+
+.form-actions { display: flex; gap: var(--s3); padding-top: var(--s2); }
+
+.btn-save {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  padding: .65rem 1.35rem;
+  background: var(--primary); color: #fff;
+  border: none; border-radius: var(--radius-sm);
+  font-size: var(--text-sm); font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: opacity var(--trans);
+}
+
+.btn-save:hover { opacity: .85; }
+.btn-save .material-icons { font-size: .95rem !important; }
+
+.btn-cancel {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  padding: .65rem 1.1rem;
+  background: var(--surface-muted); color: #374151;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm); font-weight: 600;
+  text-decoration: none; font-family: var(--font);
+  transition: background var(--trans);
+}
+
+.btn-cancel:hover { background: #f3f4f6; text-decoration: none; color: #374151; }
+.btn-cancel .material-icons { font-size: .95rem !important; }
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .topbar { padding: 0 var(--s4); }
+  .nav-icon-btn span:not(.material-icons) { display: none; }
+}
+
+@media (max-width: 540px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .form-actions { flex-direction: column-reverse; }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/partner_exchange/default/24px.svg" type="image/svg+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="profile-main">
+
+        <!-- ── Mensaje de éxito (flash) ──────────────────────────────────── -->
+        <div class="alert-success" th:if="${successMsg}">
+            <span class="material-icons">check_circle</span>
+            <span th:text="${successMsg}"></span>
+        </div>
+
+        <!-- ── Tarjeta hero: avatar, nombre, rating ───────────────────────── -->
+        <section class="profile-card">
+
+            <!-- Avatar con imagen o inicial — clic → editar foto -->
+            <a th:href="@{/profile/edit}" class="profile-avatar-wrap" title="Cambiar foto de perfil">
+                <img th:if="${profile.avatarUrl != null and !#strings.isEmpty(profile.avatarUrl)}"
+                     th:src="${profile.avatarUrl}"
+                     th:alt="${displayName}"
+                     class="profile-avatar">
+                <div th:unless="${profile.avatarUrl != null and !#strings.isEmpty(profile.avatarUrl)}"
+                     class="profile-avatar-placeholder"
+                     th:text="${avatarInitial}">U</div>
+                <div class="avatar-overlay">
+                    <span class="material-icons">photo_camera</span>
+                </div>
+            </a>
+
+            <h1 class="profile-name" th:text="${displayName}">Nombre Apellido</h1>
+            <p class="profile-username" th:text="'@' + ${loggedUser.username}">@usuario</p>
+
+            <div class="profile-rating">
+                <span class="material-icons star-icon">star</span>
+                <span class="rating-value"
+                      th:text="${#numbers.formatDecimal(profile.averageRating, 1, 1)}">0.0</span>
+                <span class="rating-count"
+                      th:text="'(' + ${profile.totalReviews} + ' reseñas)'"></span>
+            </div>
+        </section>
+
+        <!-- ── Información ────────────────────────────────────────────────── -->
+        <section class="info-card">
+            <div class="info-card-header">
+                <h2>Información</h2>
+                <div class="card-icon-actions">
+                    <a th:href="@{/profile/edit}" class="icon-btn icon-btn-edit" title="Editar perfil">
+                        <span class="material-icons">edit</span>
+                    </a>
+                    <form th:action="@{/profile/delete}" method="post" style="margin:0"
+                          data-confirm="¿Seguro que quieres eliminar todos los datos de tu perfil? Esta acción no se puede deshacer.">
+                        <button type="submit" class="icon-btn icon-btn-delete" title="Eliminar datos del perfil">
+                            <span class="material-icons">delete</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <ul class="info-list">
+                <li>
+                    <span class="material-icons info-icon">email</span>
+                    <span class="info-value" th:text="${loggedUser.email}">email@example.com</span>
+                </li>
+                <li>
+                    <span class="material-icons info-icon">location_on</span>
+                    <span th:if="${!#strings.isEmpty(profile.city)}"
+                          class="info-value" th:text="${profile.city}">Ciudad</span>
+                    <span th:unless="${!#strings.isEmpty(profile.city)}"
+                          class="info-value empty">Sin ubicación</span>
+                </li>
+                <li>
+                    <span class="material-icons info-icon">calendar_today</span>
+                    <span class="info-value"
+                          th:text="'Miembro desde ' + ${#temporals.format(loggedUser.createdAt, 'MMMM yyyy')}">
+                    </span>
+                </li>
+            </ul>
+
+            <!-- Biografía -->
+            <div class="bio-section" th:if="${!#strings.isEmpty(profile.bio)}">
+                <h3>Sobre mí</h3>
+                <p th:text="${profile.bio}">Biografía...</p>
+            </div>
+            <div class="bio-section bio-empty" th:unless="${!#strings.isEmpty(profile.bio)}">
+                <span class="material-icons">edit_note</span>
+                <span>Aún no has añadido una biografía. ¡Edita tu perfil para contarle algo al mundo!</span>
+            </div>
+        </section>
+
+        <!-- ── Eliminar cuenta ────────────────────────────────────────────── -->
+        <section class="danger-section">
+            <form th:action="@{/users/delete}" method="post"
+                  data-confirm="¿Seguro que quieres eliminar tu cuenta? Se borrarán todos tus datos y publicaciones. Esta acción no se puede deshacer.">
+                <button type="submit" class="btn-danger">
+                    <span class="material-icons">person_remove</span>
+                    Eliminar cuenta
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script th:src="@{/js/modal.js}"></script>
+</body>
+</html>

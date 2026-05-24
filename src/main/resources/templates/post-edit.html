@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/partner_exchange/default/24px.svg" type="image/svg+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isNew} ? 'Swapify — Nueva publicación' : 'Swapify — Editar publicación'">Swapify</title>
+    <link rel="stylesheet" th:href="@{/css/post-edit.css}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="profile-main">
+        <div class="edit-card">
+
+            <!-- ── Cabecera ─────────────────────────────────────────────────── -->
+            <div class="edit-header">
+                <a th:href="@{/posts}" class="back-btn">
+                    <span class="material-icons">arrow_back</span>
+                    Volver
+                </a>
+                <h1 th:text="${isNew} ? 'Nueva publicación' : 'Editar publicación'">Publicación</h1>
+            </div>
+
+            <!-- ── Formulario ────────────────────────────────────────────────── -->
+            <form th:action="${isNew} ? @{/posts} : @{/posts/{id}/edit(id=${postId})}"
+                  th:object="${postForm}" method="post" class="edit-form" novalidate>
+
+                <!-- Título -->
+                <div class="form-group">
+                    <label for="title">
+                        <span class="material-icons">title</span>
+                        Título
+                    </label>
+                    <input type="text" id="title" th:field="*{title}"
+                           th:classappend="${#fields.hasErrors('title')} ? ' error'"
+                           placeholder="¿Qué ofreces?" maxlength="150" autocomplete="off">
+                    <span class="field-error" th:if="${#fields.hasErrors('title')}"
+                          th:errors="*{title}"></span>
+                </div>
+
+                <!-- Descripción -->
+                <div class="form-group">
+                    <label for="description">
+                        <span class="material-icons">notes</span>
+                        Descripción
+                    </label>
+                    <textarea id="description" th:field="*{description}"
+                              rows="4" placeholder="Describe tu publicación con detalle..."></textarea>
+                </div>
+
+                <!-- Tipo -->
+                <div class="form-group">
+                    <label>
+                        <span class="material-icons">category</span>
+                        Tipo
+                    </label>
+                    <div class="type-radio-group">
+                        <label class="type-radio-option">
+                            <input type="radio" th:field="*{type}" value="GOOD">
+                            <span class="type-radio-label">
+                                <span class="material-icons">inventory_2</span>
+                                Bien
+                            </span>
+                        </label>
+                        <label class="type-radio-option">
+                            <input type="radio" th:field="*{type}" value="SERVICE">
+                            <span class="type-radio-label">
+                                <span class="material-icons">build</span>
+                                Servicio
+                            </span>
+                        </label>
+                    </div>
+                    <span class="field-error" th:if="${#fields.hasErrors('type')}"
+                          th:errors="*{type}"></span>
+                </div>
+
+                <!-- Estado (solo al editar) -->
+                <div class="form-group" th:unless="${isNew}">
+                    <label for="status">
+                        <span class="material-icons">toggle_on</span>
+                        Estado
+                    </label>
+                    <select id="status" th:field="*{status}" class="form-select">
+                        <option value="AVAILABLE">Disponible</option>
+                        <option value="RESERVED">Reservado</option>
+                        <option value="EXCHANGED">Intercambiado</option>
+                    </select>
+                </div>
+
+                <!-- Imágenes -->
+                <div class="form-group">
+                    <label>
+                        <span class="material-icons">image</span>
+                        Imágenes (URLs)
+                    </label>
+                    <div id="image-inputs">
+                        <th:block th:if="${not #lists.isEmpty(postForm.imageUrls)}">
+                            <div th:each="url,stat : ${postForm.imageUrls}" class="image-input-row">
+                                <span class="material-icons img-row-icon">link</span>
+                                <input type="url"
+                                       th:name="'imageUrls[' + ${stat.index} + ']'"
+                                       th:value="${url}"
+                                       placeholder="https://ejemplo.com/imagen.jpg">
+                                <button type="button" class="btn-remove-image" onclick="removeImage(this)">
+                                    <span class="material-icons">close</span>
+                                </button>
+                            </div>
+                        </th:block>
+                        <div th:if="${#lists.isEmpty(postForm.imageUrls)}" class="image-input-row">
+                            <span class="material-icons img-row-icon">link</span>
+                            <input type="url" name="imageUrls[0]"
+                                   placeholder="https://ejemplo.com/imagen.jpg">
+                            <button type="button" class="btn-remove-image" onclick="removeImage(this)">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add-image" onclick="addImage()">
+                        <span class="material-icons">add_photo_alternate</span>
+                        Añadir imagen
+                    </button>
+                </div>
+
+                <!-- Categoría -->
+                <div class="form-group">
+                    <label for="categoryId">
+                        <span class="material-icons">label</span>
+                        Categoría
+                    </label>
+                    <select id="categoryId" th:field="*{categoryId}" class="form-select">
+                        <option value="">Sin categoría</option>
+                        <option th:each="cat : ${categories}"
+                                th:value="${cat.id}"
+                                th:text="${cat.name}">Categoría</option>
+                    </select>
+                </div>
+
+                <!-- Acciones -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">
+                        <span class="material-icons">save</span>
+                        Guardar
+                    </button>
+                    <a th:href="@{/posts}" class="btn-cancel">
+                        <span class="material-icons">close</span>
+                        Cancelar
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script>
+        let imageCount = document.querySelectorAll('#image-inputs .image-input-row').length;
+
+        function addImage() {
+            const row = document.createElement('div');
+            row.className = 'image-input-row';
+            row.innerHTML = `
+                <span class="material-icons img-row-icon">link</span>
+                <input type="url" name="imageUrls[${imageCount}]"
+                       placeholder="https://ejemplo.com/imagen.jpg">
+                <button type="button" class="btn-remove-image" onclick="removeImage(this)">
+                    <span class="material-icons">close</span>
+                </button>`;
+            document.getElementById('image-inputs').appendChild(row);
+            imageCount++;
+        }
+
+        function removeImage(btn) {
+            btn.closest('.image-input-row').remove();
+            document.querySelectorAll('#image-inputs .image-input-row input').forEach((input, i) => {
+                input.name = `imageUrls[${i}]`;
+            });
+            imageCount = document.querySelectorAll('#image-inputs .image-input-row').length;
+        }
+    </script>
+</body>
+</html>

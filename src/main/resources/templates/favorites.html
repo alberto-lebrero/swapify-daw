@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/partner_exchange/default/24px.svg" type="image/svg+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis favoritos</title>
+    <link rel="stylesheet" th:href="@{/css/favorites.css}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="home-main">
+
+        <div class="home-header">
+            <div>
+                <h1>Mis favoritos</h1>
+                <p th:text="${#lists.size(posts)} + ' publicaciones guardadas'">0 publicaciones guardadas</p>
+            </div>
+        </div>
+
+        <div class="posts-grid">
+
+            <article class="post-card" th:each="post : ${posts}" th:if="${not #lists.isEmpty(posts)}">
+
+                <!-- Carousel de imágenes -->
+                <div class="post-carousel" th:if="${not #lists.isEmpty(post.images)}">
+                    <div class="carousel-inner">
+                        <img th:each="img,stat : ${post.images}"
+                             th:src="${img.url}"
+                             th:alt="${post.title}"
+                             th:classappend="${stat.first} ? ' active'"
+                             class="carousel-slide">
+                    </div>
+                    <th:block th:if="${#lists.size(post.images) > 1}">
+                        <button type="button" class="carousel-btn carousel-prev" aria-label="Anterior">
+                            <span class="material-icons">chevron_left</span>
+                        </button>
+                        <button type="button" class="carousel-btn carousel-next" aria-label="Siguiente">
+                            <span class="material-icons">chevron_right</span>
+                        </button>
+                        <div class="carousel-dots">
+                            <span th:each="img,stat : ${post.images}"
+                                  th:classappend="${stat.first} ? ' active'"
+                                  class="dot"></span>
+                        </div>
+                    </th:block>
+                </div>
+
+                <!-- Chips: tipo y categoría -->
+                <div class="post-card-header">
+                    <th:block th:switch="${post.type.name()}">
+                        <span th:case="'GOOD'" class="type-chip chip-good">
+                            <span class="material-icons">inventory_2</span>Bien
+                        </span>
+                        <span th:case="'SERVICE'" class="type-chip chip-service">
+                            <span class="material-icons">build</span>Servicio
+                        </span>
+                    </th:block>
+                    <span class="category-chip"
+                          th:if="${post.category != null}"
+                          th:text="${post.category.name}"></span>
+                </div>
+
+                <!-- Título y descripción -->
+                <div class="post-card-body">
+                    <h3 class="post-title" th:text="${post.title}">Título de la publicación</h3>
+                    <p class="post-desc"
+                       th:text="${post.description != null ? post.description : 'Sin descripción.'}">
+                        Descripción...
+                    </p>
+                </div>
+
+                <!-- Autor, fecha y botón quitar favorito -->
+                <div class="post-card-footer">
+                    <span class="post-author">
+                        <span class="material-icons">person</span>
+                        <span th:text="'@' + ${post.user.username}">@usuario</span>
+                    </span>
+                    <div class="post-footer-right">
+                        <span class="post-date"
+                              th:text="${#temporals.format(post.createdAt, 'dd/MM/yyyy')}">
+                            01/01/2024
+                        </span>
+                        <form th:action="@{/favorites/{id}/toggle(id=${post.id})}" method="post" style="margin:0">
+                            <button type="submit" class="favorite-btn is-favorited" title="Quitar de favoritos">
+                                <span class="material-icons">favorite</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- Estado vacío -->
+            <div class="empty-state" th:if="${#lists.isEmpty(posts)}">
+                <span class="material-icons">favorite_border</span>
+                <h2>Aún no tienes favoritos</h2>
+                <p>Explora las publicaciones y guarda las que más te interesen.</p>
+                <a th:href="@{/}" class="explore-link">
+                    <span class="material-icons">explore</span>
+                    Explorar publicaciones
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script>
+        document.querySelectorAll('.post-carousel').forEach(carousel => {
+            let cur = 0;
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dots   = carousel.querySelectorAll('.dot');
+            if (slides.length <= 1) return;
+
+            function goTo(n) {
+                slides[cur].classList.remove('active');
+                dots[cur]?.classList.remove('active');
+                cur = (n + slides.length) % slides.length;
+                slides[cur].classList.add('active');
+                dots[cur]?.classList.add('active');
+            }
+
+            carousel.querySelector('.carousel-prev')
+                    ?.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(cur - 1); });
+            carousel.querySelector('.carousel-next')
+                    ?.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(cur + 1); });
+        });
+    </script>
+</body>
+</html>

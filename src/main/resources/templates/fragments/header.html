@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="header" class="topbar">
+
+    <!-- Logo -->
+    <a th:href="@{/}" class="topbar-brand">
+        <span class="material-symbols-outlined topbar-logo">partner_exchange</span>
+        <span class="topbar-name">Swapify</span>
+    </a>
+
+    <!-- Sin sesión: iconos de login y registro -->
+    <nav class="topbar-nav" th:if="${loggedUser == null}">
+        <a th:href="@{/users/login}" class="nav-icon-btn">
+            <span class="material-icons">login</span>
+            <span>Iniciar sesión</span>
+        </a>
+        <a th:href="@{/users/register}" class="nav-icon-btn btn-register">
+            <span class="material-icons">person_add</span>
+            <span>Registrarse</span>
+        </a>
+    </nav>
+
+    <!-- Con sesión: perfil, publicaciones, favoritos y logout -->
+    <nav class="topbar-nav" th:if="${loggedUser != null}">
+        <a th:href="@{/profile}" class="nav-icon-btn">
+            <span class="material-icons">account_circle</span>
+            <span th:text="'@' + ${loggedUser.username}">@usuario</span>
+        </a>
+        <a th:href="@{/posts}" class="nav-icon-btn">
+            <span class="material-icons">grid_view</span>
+            <span>Mis publicaciones</span>
+        </a>
+        <a th:href="@{/favorites}" class="nav-icon-btn">
+            <span class="material-icons">favorite</span>
+            <span>Mis favoritos</span>
+        </a>
+        <form th:action="@{/users/logout}" method="post" style="margin:0">
+            <button type="submit" class="nav-icon-btn btn-logout-nav">
+                <span class="material-icons">logout</span>
+                <span>Cerrar sesión</span>
+            </button>
+        </form>
+    </nav>
+
+</header>
+
+</body>
+</html>
