@@ -32,6 +32,16 @@ public class PostService {
         return postRepository.findByStatusOrderByCreatedAtDesc(Post.PostStatus.AVAILABLE);
     }
 
+    public List<Post> findAvailableFiltered(Post.PostType type, UUID categoryId) {
+        if (type != null && categoryId != null)
+            return postRepository.findByStatusAndTypeAndCategory_IdOrderByCreatedAtDesc(Post.PostStatus.AVAILABLE, type, categoryId);
+        if (type != null)
+            return postRepository.findByStatusAndTypeOrderByCreatedAtDesc(Post.PostStatus.AVAILABLE, type);
+        if (categoryId != null)
+            return postRepository.findByStatusAndCategory_IdOrderByCreatedAtDesc(Post.PostStatus.AVAILABLE, categoryId);
+        return postRepository.findByStatusOrderByCreatedAtDesc(Post.PostStatus.AVAILABLE);
+    }
+
     public List<Post> findByUser(UUID userId) {
         return postRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }

@@ -267,9 +267,68 @@ ul, ol { list-style: none; }
 .empty-state h2 { font-size: var(--text-lg); font-weight: 600; margin: 0; }
 .empty-state p  { font-size: var(--text-sm); color: var(--text-muted); max-width: 300px; margin: 0; }
 
+/* ── Filtros ─── .filter-form, .filter-chips, .filter-chip, .filter-select, .filter-btn ─── */
+
+.filter-form {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: var(--s3); margin-bottom: var(--s5);
+}
+
+.filter-chips { display: flex; gap: var(--s2); flex-wrap: wrap; }
+
+.filter-chip {
+  display: inline-flex; align-items: center; gap: var(--s1);
+  padding: var(--s2) var(--s4);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  font-size: var(--text-sm); font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface); cursor: pointer;
+  transition: border-color var(--trans), background var(--trans), color var(--trans);
+}
+
+.filter-chip input[type="radio"] { display: none; }
+.filter-chip .material-icons { font-size: .95rem !important; }
+
+.filter-chip:hover  { border-color: var(--primary); color: var(--primary); }
+.filter-chip.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary); font-weight: 600;
+}
+
+.filter-select {
+  padding: var(--s2) 2.2rem var(--s2) var(--s3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  font-family: var(--font); font-size: var(--text-sm);
+  color: var(--text); background: var(--surface);
+  outline: none; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color var(--trans);
+}
+
+.filter-select:focus { border-color: var(--primary); }
+
+.filter-btn {
+  display: inline-flex; align-items: center; gap: var(--s1);
+  padding: var(--s2) var(--s4);
+  background: var(--primary); color: #fff;
+  border: none; border-radius: var(--radius-xl);
+  font-size: var(--text-sm); font-weight: 600;
+  font-family: var(--font); cursor: pointer;
+  transition: opacity var(--trans);
+}
+
+.filter-btn:hover { opacity: .85; }
+.filter-btn .material-icons { font-size: .95rem !important; }
+
 /* ── Responsive ───────────────────────────────────────────── */
 
 @media (max-width: 768px) {
   .topbar { padding: 0 var(--s4); }
   .nav-icon-btn span:not(.material-icons) { display: none; }
+  .filter-form { gap: var(--s2); }
 }

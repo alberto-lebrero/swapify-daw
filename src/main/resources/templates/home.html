@@ -21,6 +21,45 @@
             <p th:unless="${loggedUser != null}">Inicia sesión para contactar con los vendedores</p>
         </div>
 
+        <!-- ── Filtros ────────────────────────────────────────────────────── -->
+        <form class="filter-form" th:action="@{/}" method="get">
+
+            <!-- Tipo -->
+            <div class="filter-chips">
+                <label class="filter-chip" th:classappend="${selectedType == null} ? ' active'">
+                    <input type="radio" name="type" value=""
+                           th:checked="${selectedType == null}" onchange="this.form.submit()">
+                    Todos
+                </label>
+                <label class="filter-chip" th:classappend="${selectedType?.name() == 'GOOD'} ? ' active'">
+                    <input type="radio" name="type" value="GOOD"
+                           th:checked="${selectedType?.name() == 'GOOD'}" onchange="this.form.submit()">
+                    <span class="material-icons">inventory_2</span> Bienes
+                </label>
+                <label class="filter-chip" th:classappend="${selectedType?.name() == 'SERVICE'} ? ' active'">
+                    <input type="radio" name="type" value="SERVICE"
+                           th:checked="${selectedType?.name() == 'SERVICE'}" onchange="this.form.submit()">
+                    <span class="material-icons">build</span> Servicios
+                </label>
+            </div>
+
+            <!-- Categoría -->
+            <select name="categoryId" class="filter-select" onchange="this.form.submit()">
+                <option value="">Todas las categorías</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.name}"
+                        th:selected="${selectedCategoryId != null and selectedCategoryId == cat.id}">
+                </option>
+            </select>
+
+            <button type="submit" class="filter-btn">
+                <span class="material-icons">filter_list</span>
+                Filtrar
+            </button>
+
+        </form>
+
         <!-- ── Grid de publicaciones ───────────────────────────────────────── -->
         <div class="posts-grid">
 
