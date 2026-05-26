@@ -15,13 +15,13 @@
 
     <main class="profile-main">
 
-        <!-- ── Mensaje de éxito (flash) ──────────────────────────────────── -->
+        <!-- Mensaje de éxito (flash) -->
         <div class="alert-success" th:if="${successMsg}">
             <span class="material-icons">check_circle</span>
             <span th:text="${successMsg}"></span>
         </div>
 
-        <!-- ── Tarjeta hero: avatar, nombre, rating ───────────────────────── -->
+        <!-- Tarjeta hero: avatar, nombre, rating -->
         <section class="profile-card">
 
             <!-- Avatar con imagen o inicial — clic → editar foto -->
@@ -50,7 +50,7 @@
             </div>
         </section>
 
-        <!-- ── Información ────────────────────────────────────────────────── -->
+        <!-- Información -->
         <section class="info-card">
             <div class="info-card-header">
                 <h2>Información</h2>
@@ -98,7 +98,7 @@
             </div>
         </section>
 
-        <!-- ── Eliminar cuenta ────────────────────────────────────────────── -->
+        <!-- Eliminar cuenta -->
         <section class="danger-section">
             <form th:action="@{/users/delete}" method="post"
                   data-confirm="¿Seguro que quieres eliminar tu cuenta? Se borrarán todos tus datos y publicaciones. Esta acción no se puede deshacer.">

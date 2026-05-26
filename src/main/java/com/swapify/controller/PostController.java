@@ -32,7 +32,7 @@ public class PostController {
         this.categoryRepository = categoryRepository;
     }
 
-    // ── LIST ─────────────────────────────────────────────────────────────────
+    // LIST
 
     @GetMapping
     public String listPosts(HttpSession session, Model model) {
@@ -44,7 +44,7 @@ public class PostController {
         return "posts";
     }
 
-    // ── CREATE ────────────────────────────────────────────────────────────────
+    // CREATE
 
     @GetMapping("/new")
     public String showCreateForm(HttpSession session, Model model) {
@@ -79,7 +79,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    // ── EDIT ──────────────────────────────────────────────────────────────────
+    // EDIT
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable UUID id, HttpSession session, Model model) {
@@ -127,7 +127,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    // ── DELETE ────────────────────────────────────────────────────────────────
+    // DELETE
 
     @PostMapping("/{id}/delete")
     public String deletePost(
@@ -143,7 +143,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    // Helpers
 
     private void populateFormModel(Model model, User loggedUser) {
         model.addAttribute("categories", categoryRepository.findAll());

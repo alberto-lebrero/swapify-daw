@@ -1,11 +1,11 @@
-/* ═══════════════════════════════════════════════════════════
-   profile-edit.css — Editar perfil
-   Contiene TODOS los estilos que usa esta vista.
-   ═══════════════════════════════════════════════════════════ */
+/*
+ * Editar perfil
+ * Contiene TODOS los estilos que usa esta vista.
+ */
 
 @import "variables.css";
 
-/* ── Reset / Base ─────────────────────────────────────────── */
+/* Base */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -36,7 +36,7 @@ ul, ol { list-style: none; }
 
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-/* ── Topbar (fragments/header.html) ─── .topbar, .topbar-brand, .topbar-logo, .topbar-nav, .nav-icon-btn, .btn-register ─── */
+/* Topbar (fragments/header.html) .topbar, .topbar-brand, .topbar-logo, .topbar-nav, .nav-icon-btn, .btn-register */
 
 .topbar {
   background: var(--primary);
@@ -80,7 +80,7 @@ ul, ol { list-style: none; }
 .nav-icon-btn .material-icons { font-size: 1rem !important; }
 .btn-register { border: 1px solid rgba(255,255,255,.4); }
 
-/* ── Footer (fragments/footer.html) ─── .site-footer, .footer-inner, .footer-copy ─── */
+/* Footer (fragments/footer.html) -- .site-footer, .footer-inner, .footer-copy */
 
 .site-footer {
   padding: var(--s4) var(--s6);
@@ -95,7 +95,7 @@ ul, ol { list-style: none; }
 
 .footer-copy { font-size: var(--text-sm); color: var(--text-secondary); margin: 0; }
 
-/* ── Contenedor central de formularios ─── .profile-main ─── */
+/* Contenedor central de formularios -- .profile-main */
 
 .profile-main {
   width: min(580px, calc(100% - var(--s6) * 2));
@@ -106,7 +106,7 @@ ul, ol { list-style: none; }
   align-self: center;
 }
 
-/* ── Tarjeta de edición ─── .edit-card, .edit-header, .edit-form ─── */
+/* Tarjeta de edición -- .edit-card, .edit-header, .edit-form */
 
 .edit-card {
   background: var(--surface);
@@ -126,7 +126,7 @@ ul, ol { list-style: none; }
 
 .edit-form { display: flex; flex-direction: column; gap: var(--s4); }
 
-/* ── Botón volver ─── .back-btn ─── */
+/* Botón volver -- .back-btn */
 
 .back-btn {
   display: inline-flex; align-items: center; gap: var(--s1);
@@ -137,13 +137,13 @@ ul, ol { list-style: none; }
 .back-btn:hover { text-decoration: underline; }
 .back-btn .material-icons { font-size: 1rem !important; }
 
-/* ── Fila de dos columnas ─── .form-row ─── */
+/* Fila de dos columnas -- .form-row */
 
 .form-row {
   display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4);
 }
 
-/* ── Grupo de campo ─── .form-group, label, inputs, textarea ─── */
+/* Grupo de campo -- .form-group, label, inputs, textarea */
 
 .form-group { display: flex; flex-direction: column; gap: .3rem; }
 
@@ -185,11 +185,11 @@ ul, ol { list-style: none; }
 .form-group input.error:focus,
 .form-group textarea.error:focus { box-shadow: 0 0 0 3px rgba(220,38,38,.12); }
 
-/* ── Error de campo ─── .field-error ─── */
+/* Error de campo -- .field-error */
 
 .field-error { font-size: var(--text-xs); color: var(--danger); }
 
-/* ── Barra de acciones del formulario ─── .form-actions, .btn-save, .btn-cancel ─── */
+/* Barra de acciones del formulario -- .form-actions, .btn-save, .btn-cancel */
 
 .form-actions { display: flex; gap: var(--s3); padding-top: var(--s2); }
 
@@ -220,7 +220,7 @@ ul, ol { list-style: none; }
 .btn-cancel:hover { background: #f3f4f6; text-decoration: none; color: #374151; }
 .btn-cancel .material-icons { font-size: .95rem !important; }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* Responsive */
 
 @media (max-width: 768px) {
   .topbar { padding: 0 var(--s4); }

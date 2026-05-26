@@ -15,7 +15,7 @@
 
     <main class="posts-main">
 
-        <!-- ── Cabecera ────────────────────────────────────────────────────── -->
+        <!-- Cabecera -->
         <div class="posts-page-header">
             <div>
                 <h1>Mis publicaciones</h1>
@@ -27,13 +27,13 @@
             </a>
         </div>
 
-        <!-- ── Flash ───────────────────────────────────────────────────────── -->
+        <!-- Flash -->
         <div class="alert-success" th:if="${successMsg}">
             <span class="material-icons">check_circle</span>
             <span th:text="${successMsg}"></span>
         </div>
 
-        <!-- ── Lista de publicaciones ──────────────────────────────────────── -->
+        <!-- Lista de publicaciones -->
         <div class="post-list" th:if="${not #lists.isEmpty(posts)}">
             <div class="post-manage-card" th:each="post : ${posts}">
 
@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <!-- ── Estado vacío ────────────────────────────────────────────────── -->
+        <!-- Estado vacío -->
         <div class="posts-empty" th:if="${#lists.isEmpty(posts)}">
             <span class="material-icons">post_add</span>
             <h2>Aún no tienes publicaciones</h2>

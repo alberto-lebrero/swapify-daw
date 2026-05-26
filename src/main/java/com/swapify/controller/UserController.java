@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // ── Registro ─────────────────────────────────────────────────────────────
+    // Registro
 
     @GetMapping("/register")
     public String showRegister(Model model, HttpSession session) {
@@ -56,8 +56,8 @@ public class UserController {
         }
     }
 
-    // ── Login ────────────────────────────────────────────────────────────────
-
+    // Login
+    
     @GetMapping("/login")
     public String showLogin(Model model, HttpSession session) {
         if (session.getAttribute(SESSION_USER_KEY) != null) return "redirect:/";
@@ -83,23 +83,11 @@ public class UserController {
         }
     }
 
-    // ── Dashboard ────────────────────────────────────────────────────────────
-
-    @GetMapping("/dashboard")
-    public String dashboard(HttpSession session) {
-        if (session.getAttribute(SESSION_USER_KEY) == null) return "redirect:/users/login";
-        return "redirect:/profile";
-    }
-
-    // ── Logout ───────────────────────────────────────────────────────────────
-
     @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
-
-    // ── Eliminar cuenta ──────────────────────────────────────────────────────
 
     @PostMapping("/delete")
     public String deleteAccount(HttpSession session) {

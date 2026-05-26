@@ -54,7 +54,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // ── Relaciones ────────────────────────────────────────────────────────────
+    // Relaciones
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @ToString.Exclude

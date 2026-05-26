@@ -385,7 +385,7 @@ ul, ol { list-style: none; }
 .btn-danger:hover { background: #fef2f2; }
 .btn-danger .material-icons { font-size: 1rem !important; }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* Responsive */
 
 @media (max-width: 768px) {
   .topbar { padding: 0 var(--s4); }

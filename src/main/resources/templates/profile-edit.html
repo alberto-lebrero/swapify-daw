@@ -16,7 +16,7 @@
     <main class="profile-main">
         <div class="edit-card">
 
-            <!-- ── Cabecera con volver ────────────────────────────────────── -->
+            <!-- Cabecera con volver -->
             <div class="edit-header">
                 <a th:href="@{/profile}" class="back-btn">
                     <span class="material-icons">arrow_back</span>
@@ -25,7 +25,7 @@
                 <h1>Editar perfil</h1>
             </div>
 
-            <!-- ── Formulario ─────────────────────────────────────────────── -->
+            <!-- Formulario -->
             <form th:action="@{/profile/edit}" th:object="${profileForm}"
                   method="post" class="edit-form" novalidate>
 

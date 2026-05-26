@@ -327,7 +327,7 @@ ul, ol { list-style: none; }
 .btn-cancel:hover { background: #f3f4f6; text-decoration: none; color: #374151; }
 .btn-cancel .material-icons { font-size: .95rem !important; }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* Responsive */
 
 @media (max-width: 768px) {
   .topbar { padding: 0 var(--s4); }

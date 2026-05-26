@@ -22,7 +22,7 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    // ── Ver perfil ────────────────────────────────────────────────────────────
+
 
     @GetMapping
     public String viewProfile(HttpSession session, Model model) {
@@ -42,7 +42,6 @@ public class ProfileController {
         return "profile";
     }
 
-    // ── Formulario de edición ─────────────────────────────────────────────────
 
     @GetMapping("/edit")
     public String showEditForm(HttpSession session, Model model) {
@@ -55,7 +54,6 @@ public class ProfileController {
         return "profile-edit";
     }
 
-    // ── Procesar edición ──────────────────────────────────────────────────────
 
     @PostMapping("/edit")
     public String updateProfile(
@@ -72,7 +70,6 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    // ── Eliminar datos del perfil ─────────────────────────────────────────────
 
     @PostMapping("/delete")
     public String deleteProfile(HttpSession session, RedirectAttributes redirectAttrs) {
@@ -84,7 +81,7 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    // ── Utilidades ────────────────────────────────────────────────────────────
+    // Utilidades
 
     private User getLoggedUser(HttpSession session) {
         return (User) session.getAttribute(SESSION_USER_KEY);

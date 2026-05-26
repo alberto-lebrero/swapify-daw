@@ -16,7 +16,7 @@
     <main class="profile-main">
         <div class="edit-card">
 
-            <!-- ── Cabecera ─────────────────────────────────────────────────── -->
+            <!-- Cabecera -->
             <div class="edit-header">
                 <a th:href="@{/posts}" class="back-btn">
                     <span class="material-icons">arrow_back</span>
@@ -25,7 +25,7 @@
                 <h1 th:text="${isNew} ? 'Nueva publicación' : 'Editar publicación'">Publicación</h1>
             </div>
 
-            <!-- ── Formulario ────────────────────────────────────────────────── -->
+            <!-- Formulario -->
             <form th:action="${isNew} ? @{/posts} : @{/posts/{id}/edit(id=${postId})}"
                   th:object="${postForm}" method="post" class="edit-form" novalidate>
 

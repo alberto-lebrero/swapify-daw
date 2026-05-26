@@ -1,11 +1,11 @@
-/* ═══════════════════════════════════════════════════════════
-   home.css — Portada (listado público de publicaciones)
-   Contiene TODOS los estilos que usa esta vista.
-   ═══════════════════════════════════════════════════════════ */
+/* 
+ * home.css - Portada (listado público de publicaciones)
+ * Contiene TODOS los estilos que usa esta vista.
+ */
 
 @import "variables.css";
 
-/* ── Reset / Base ─────────────────────────────────────────── */
+/* Base */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -38,7 +38,7 @@ ul, ol { list-style: none; }
 
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-/* ── Topbar (fragments/header.html) ─── .topbar, .topbar-brand, .topbar-logo, .topbar-nav, .nav-icon-btn, .btn-register ─── */
+/* Topbar (fragments/header.html) -- .topbar, .topbar-brand, .topbar-logo, .topbar-nav, .nav-icon-btn, .btn-register */
 
 .topbar {
   background: var(--primary);
@@ -82,7 +82,7 @@ ul, ol { list-style: none; }
 .nav-icon-btn .material-icons { font-size: 1rem !important; }
 .btn-register { border: 1px solid rgba(255,255,255,.4); }
 
-/* ── Footer (fragments/footer.html) ─── .site-footer, .footer-inner, .footer-copy ─── */
+/* Footer (fragments/footer.html) -- .site-footer, .footer-inner, .footer-copy */
 
 .site-footer {
   padding: var(--s4) var(--s6);
@@ -97,7 +97,7 @@ ul, ol { list-style: none; }
 
 .footer-copy { font-size: var(--text-sm); color: var(--text-secondary); margin: 0; }
 
-/* ── Layout del feed ─── .home-main, .home-header, .posts-grid ─── */
+/* Layout del feed -- .home-main, .home-header, .posts-grid */
 
 .home-main {
   width: 100%; max-width: 1120px;
@@ -120,7 +120,7 @@ ul, ol { list-style: none; }
   gap: var(--s4);
 }
 
-/* ── Chips de tipo y categoría ─── .type-chip, .chip-good, .chip-service, .category-chip ─── */
+/* Chips de tipo y categoría -- .type-chip, .chip-good, .chip-service, .category-chip */
 
 .type-chip {
   display: inline-flex; align-items: center; gap: .2rem;
@@ -140,7 +140,7 @@ ul, ol { list-style: none; }
   border: 1px solid var(--border);
 }
 
-/* ── Carousel de imágenes ─── .post-carousel, .carousel-inner, .carousel-slide, .carousel-btn, .carousel-prev, .carousel-next, .carousel-dots, .dot ─── */
+/* Carousel de imágenes -- .post-carousel, .carousel-inner, .carousel-slide, .carousel-btn, .carousel-prev, .carousel-next, .carousel-dots, .dot */
 
 .post-carousel {
   position: relative; overflow: hidden;
@@ -188,7 +188,7 @@ ul, ol { list-style: none; }
 
 .dot.active { background: #fff; }
 
-/* ── Tarjeta de publicación ─── .post-card, .post-card-header, .post-card-body, .post-title, .post-desc, .post-card-footer, .post-author, .post-footer-right ─── */
+/* Tarjeta de publicación -- .post-card, .post-card-header, .post-card-body, .post-title, .post-desc, .post-card-footer, .post-author, .post-footer-right */
 
 .post-card {
   background: var(--surface);
@@ -237,7 +237,7 @@ ul, ol { list-style: none; }
 
 .post-footer-right { display: flex; align-items: center; gap: var(--s2); }
 
-/* ── Botón favorito ─── .favorite-btn, .favorite-btn.is-favorited ─── */
+/* Botón favorito -- .favorite-btn, .favorite-btn.is-favorited */
 
 .favorite-btn {
   background: none; border: none; cursor: pointer;
@@ -252,7 +252,7 @@ ul, ol { list-style: none; }
 .favorite-btn.is-favorited { color: var(--red); }
 .favorite-btn .material-icons { font-size: 1.1rem !important; }
 
-/* ── Estado vacío ─── .empty-state ─── */
+/* Estado vacío -- .empty-state */
 
 .empty-state {
   grid-column: 1 / -1;
@@ -267,7 +267,7 @@ ul, ol { list-style: none; }
 .empty-state h2 { font-size: var(--text-lg); font-weight: 600; margin: 0; }
 .empty-state p  { font-size: var(--text-sm); color: var(--text-muted); max-width: 300px; margin: 0; }
 
-/* ── Filtros ─── .filter-form, .filter-chips, .filter-chip, .filter-select, .filter-btn ─── */
+/* Filtros -- .filter-form, .filter-chips, .filter-chip, .filter-select, .filter-btn */
 
 .filter-form {
   display: flex; align-items: center; flex-wrap: wrap;
@@ -325,7 +325,7 @@ ul, ol { list-style: none; }
 .filter-btn:hover { opacity: .85; }
 .filter-btn .material-icons { font-size: .95rem !important; }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* Responsive */
 
 @media (max-width: 768px) {
   .topbar { padding: 0 var(--s4); }

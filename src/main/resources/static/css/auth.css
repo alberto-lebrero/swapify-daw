@@ -1,12 +1,12 @@
-/* ═══════════════════════════════════════════════════════════
-   login.css — Inicio de sesión
-   Página autónoma: no tiene topbar ni footer.
-   Contiene TODOS los estilos que usa esta vista.
-   ═══════════════════════════════════════════════════════════ */
+/*
+ * Inicio de sesión
+ * Página autónoma: no tiene topbar ni footer.
+ * Contiene TODOS los estilos que usa esta vista.
+ */
 
 @import "variables.css";
 
-/* ── Reset / Base ─────────────────────────────────────────── */
+/* Base */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -29,7 +29,7 @@ a:hover { text-decoration: underline; }
 
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-/* ── Layout autónomo de auth — body centrado sobre fondo primario ─── */
+/* Layout autónomo de auth -- body centrado sobre fondo primario */
 
 body {
   background: var(--primary);
@@ -38,7 +38,7 @@ body {
   padding: var(--s6);
 }
 
-/* ── Contenedor y tarjeta (.auth-container, .auth-card) ───── */
+/* Contenedor y tarjeta (.auth-container, .auth-card) */
 
 .auth-container {
   width: 100%;
@@ -52,7 +52,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
 }
 
-/* ── Cabecera de la tarjeta (.auth-header, .auth-logo, .auth-title, .auth-subtitle) ─── */
+/* Cabecera de la tarjeta (.auth-header, .auth-logo, .auth-title, .auth-subtitle) */
 
 .auth-header {
   text-align: center;
@@ -79,7 +79,7 @@ body {
   font-size: var(--text-sm);
 }
 
-/* ── Formulario (.auth-form) ──────────────────────────────── */
+/* Formulario (.auth-form) */
 
 .auth-form {
   display: flex;
@@ -87,7 +87,7 @@ body {
   gap: .9rem;
 }
 
-/* ── Pie de la tarjeta (.auth-footer) ─────────────────────── */
+/* Pie de la tarjeta (.auth-footer) */
 
 .auth-footer {
   text-align: center;
@@ -99,7 +99,7 @@ body {
 .auth-footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
 .auth-footer a:hover { text-decoration: underline; }
 
-/* ── Grupo de campo (.form-group, label, input) ───────────── */
+/* Grupo de campo (.form-group, label, input) */
 
 .form-group { display: flex; flex-direction: column; gap: .3rem; }
 
@@ -135,11 +135,11 @@ body {
 .form-group input.error { border-color: var(--danger); }
 .form-group input.error:focus { box-shadow: 0 0 0 3px rgba(220,38,38,.12); }
 
-/* ── Error de campo (.field-error) ───────────────────────── */
+/* Error de campo (.field-error) */
 
 .field-error { font-size: var(--text-xs); color: var(--danger); }
 
-/* ── Alerta de formulario (.form-alert.error) ─────────────── */
+/* Alerta de formulario (.form-alert.error) */
 
 .form-alert {
   border-radius: var(--radius-sm);
@@ -155,7 +155,7 @@ body {
   border: 1px solid #fca5a5;
 }
 
-/* ── Botón principal de submit (.btn-primary) ─────────────── */
+/* Botón principal de submit (.btn-primary) */
 
 .btn-primary {
   display: block;
@@ -175,7 +175,7 @@ body {
 .btn-primary:hover    { opacity: .85; }
 .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* Responsive */
 
 @media (max-width: 440px) {
   .auth-card { padding: 2rem 1.25rem; }
